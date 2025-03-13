@@ -19,6 +19,9 @@ class Maze:
     HALL = 1
     PLAYER = 2
     PRIZE = 3
+
+    # ESSA VARIÁVEL É UM INCREMENTO AO CÓDIGO - EXIBIR UMA MENSAGEM DE QUE O PRÊMIO FOI ENCONTRADO NA TELA
+    WINNER = False
     
     def __init__(self):
         '''
@@ -55,6 +58,7 @@ class Maze:
             posy = random.randint(2, 39)
             if self.M[posx, posy] == Maze.HALL:
                 self.init_pos_player = (posx, posy)
+                self.M[posx, posy] = Maze.PLAYER
                 break
         
         #escolhendo a posição aleatória do premio em um corredor
@@ -85,6 +89,7 @@ class Maze:
 
         '''
         if self.M[pos[0], pos[1]] == Maze.PRIZE:
+            self.WINNER = True
             return True
         else:
             return False
@@ -139,6 +144,7 @@ class Maze:
             Posição inicial (x,y) do jogador no labirinto.
 
         '''
+        
         return self.init_pos_player
             
     def run(self):
@@ -166,6 +172,7 @@ class Maze:
         GRAY = (192, 192, 192)
         BLUE = (0, 0, 255)
         GOLD = (255, 215, 0)
+        WHITE = (255, 255, 255)
     
         running = True
         while running:
@@ -187,7 +194,24 @@ class Maze:
                         color = BLUE
                     elif self.M[y, x] == Maze.PRIZE:
                         color = GOLD
-                       
+
                     pygame.draw.rect(screen, color, (x * cell_size, y * cell_size, cell_size, cell_size))
-    
+
+            # INCREMENTO AO CÓDIGO - EXIBIR UMA MENSAGEM DE QUE O PRÊMIO FOI ENCONTRADO NA TELA
+            if self.WINNER:
+                    font = pygame.font.SysFont('Arial', 30) 
+                    text = font.render("Prêmio encontrado!", True, WHITE) 
+                    
+                    text_width = text.get_width()
+                    text_height = text.get_height()
+                    rectangle_width = text_width + 20 
+                    rectangle_height = text_height + 20 
+                    rectangle_x = (width // 2 - text_width // 2) - 10
+                    rectangle_y = (height // 2 - text_height // 2)  + 10
+
+                    pygame.draw.rect(screen, BLACK, 
+                                    (rectangle_x, rectangle_y, rectangle_width, rectangle_height))
+
+                    screen.blit(text, (width // 2 - text.get_width() // 2, height // 2))
+
             pygame.display.flip()
