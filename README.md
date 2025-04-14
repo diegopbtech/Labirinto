@@ -1,6 +1,6 @@
 # Prática Labirinto - Estrutura de Dados
 
-Problema do labirinto consistem em um jogador sair de uma posição inicial qualquer e encontrar o tesouro (prêmio) contido no labirinto. Essa prática reforça o estudo da Estrutura de Dados Pilha, usando una pilha para empilhar e desempilhar posições possíveis para o jogador se movimentar dentro do labirinto.
+Implementar uma estrutura de tabela hash para armazenar n objetos com encadeamento separado duplo.
 
 Universidade Federal da Paraíba
 
